@@ -1,0 +1,20 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+    name: acs-abs
+provisioner: com.nutanix.csi
+parameters:
+    csi.storage.k8s.io/provisioner-secret-name: ntnx-secret
+    csi.storage.k8s.io/provisioner-secret-namespace: default
+    csi.storage.k8s.io/node-publish-secret-name: ntnx-secret
+    csi.storage.k8s.io/node-publish-secret-namespace: default
+    csi.storage.k8s.io/controller-expand-secret-name: ntnx-secret
+    csi.storage.k8s.io/controller-expand-secret-namespace: default
+    csi.storage.k8s.io/fstype: ext4
+# dataServiceEndPoint IP is found in the Prisim UI under Settings -> Cluster Details
+    dataServiceEndPoint: 10.16.0.106:3260
+# storageContainer name is found in the Prisim UI under Storage -> Storage Containers (use the search box, as needed)
+    storageContainer: SUSE_storage
+    storageType: NutanixVolumes
+allowVolumeExpansion: true
+reclaimPolicy: Delete
